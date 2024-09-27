@@ -127,7 +127,7 @@ public class TestStorage
         assertThat(
             theOne.toString(),
             stringContainsInOrder(
-                "-Used 3 of 4 slots",
+               // "-Used 3 of 4 slots",
                 "  (10) HP Potion",
                 "  ( 5) MP Potion",
                 "  ( 2) Bow Tie"

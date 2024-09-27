@@ -30,7 +30,7 @@ public class Inventory implements Iterable<ItemStack>, Cloneable
      */
     public static void mergeStacks(ItemStack lhs, ItemStack rhs)
     {
-        // Refer to the notes from Assignment 1
+        lhs.addItems(rhs.size());
     }
 
     /**
@@ -94,8 +94,11 @@ public class Inventory implements Iterable<ItemStack>, Cloneable
      */
     public boolean isFull()
     {
-        // Replace the next line
-        return false;
+        if (this.slots.size() == this.capacity) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -118,8 +121,10 @@ public class Inventory implements Iterable<ItemStack>, Cloneable
      */
     public ItemStack findMatchingItemStack(ItemStack key)
     {
-        // Adapt the logic from Assignment 1
-
+        for (ItemStack element : this) {
+            if (element.equals(key))
+                return element;
+        }
         return null;
     }
 
@@ -130,7 +135,7 @@ public class Inventory implements Iterable<ItemStack>, Cloneable
      */
     public void addItemStackNoCheck(ItemStack toAdd)
     {
-        // Add the missing (one) line by using `this.slots.add(????)`
+        this.slots.add(toAdd);
     }
 
     /**
@@ -167,7 +172,9 @@ public class Inventory implements Iterable<ItemStack>, Cloneable
     {
         Inventory copy = new Inventory(this.totalSlots());
 
-        // Add the missing copy logic (loop)
+        for (ItemStack element : this) {
+            copy.addItems(element);
+        }
 
         return copy;
     }
@@ -208,13 +215,15 @@ public class Inventory implements Iterable<ItemStack>, Cloneable
     public String toString()
     {
         String summaryLine = String.format(
-            " -Used %d of %d slots%n", this.utilizedSlots(), this.totalSlots()
+            "-Used %d of %d slots%n", this.utilizedSlots(), this.totalSlots()
         );
 
         StringBuilder strBld = new StringBuilder();
         strBld.append(summaryLine);
 
-        // Add the missing loop
+        for (ItemStack element : this) {
+            strBld.append(element.toString());
+        }
 
         return strBld.toString();
     }
